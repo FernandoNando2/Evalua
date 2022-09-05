@@ -1,0 +1,15 @@
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\bin\Debug\net6.0\Evalua.exe
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\bin\Debug\net6.0\Evalua.deps.json
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\bin\Debug\net6.0\Evalua.runtimeconfig.json
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\bin\Debug\net6.0\Evalua.dll
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\bin\Debug\net6.0\ref\Evalua.dll
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\bin\Debug\net6.0\Evalua.pdb
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.csproj.AssemblyReference.cache
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfoInputs.cache
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfo.cs
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.csproj.CoreCompileInputs.cache
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.dll
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\ref\Evalua.dll
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.pdb
+C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\obj\Debug\net6.0\Evalua.genruntimeconfig.cache

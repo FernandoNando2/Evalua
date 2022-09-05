@@ -1,0 +1,25 @@
+// Programa	-> 	Librerias? Variables? Main
+// Librerias	->	#include<identificador(.h)?> Librerias?
+// Variables -> tipo_dato Lista_identificadores ; Variables?
+// Lista_identificadores -> identificador (,Lista_identificadores)? 
+// Bloque de instrucciones -> {Lista de instrucciones?}
+// listainstrucciones -> instruccion listadeinstrucciones?
+// listainstruccionesCase -> instruccion listaInstruccionesCase?
+// Instruccion -> Printf | Scanf | If | While | do while | Asignacion
+// Asignacion -> identificador = Expresion ;
+// While -> while(Condicion) bloqueInstrucciones | instruccion
+// Do -> do bloqueInstrucciones | instruccion while(Condicion);
+// For -> for(Asignacion Condicion; Incremento) bloqueInstrucciones | Instruccion
+// Incremento -> Identificador ++ | --
+// Switch -> switch(Expresion){listaDeCasos}
+// listaDeCasos -> case Expresion: listaInstruccionesCase (break;)? (listaDeCasos)?
+//Condicion -> Expresion operador_relacional Expresion
+// If -> if(Condicion) Bloque de instrucciones (Else bloqueInstrucciones)?
+// Printf -> printf(cadena);
+// Scanf -> scanf(cadena);
+// Main -> void main() Bloque de instrucciones
+// Expresion -> Termino MasTermino
+// MasTermino -> (operador_termino Termino)?
+// Termino -> Factor PorFactor
+// PorFactor -> (operador_factor Factor)?
+// Factor -> numero | identificador | (Expresion) 
