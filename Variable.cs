@@ -17,7 +17,7 @@ namespace Evalua{
             valor = 0;
         }
 
-        protected void setValor(float valor){
+        public void setValor(float valor){ // Cambié el acceso del metodo de protected a public, para poder acceder a él.
             this.valor = valor;
         }
 

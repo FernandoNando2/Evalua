@@ -1,11 +1,13 @@
 using System;
 /*
 Requerimiento 1: Eliminar las dobles comillas del printf e interpretar las secuencias dentro de la cadena.
-Requerimiento 2: Marcar los errores sintacticos cuando la variable no exista
+Requerimiento 2: Marcar los errores sintacticos cuando la variable no exista. ya
+Requerimiento 3: Modificar el valor de la variable en la asignacion. ya
 */
 namespace Evalua{
     public class Lenguaje : Sintaxis{
         List <Variable> variables = new List<Variable>();
+        Stack<float> stack = new Stack<float>();
         public Lenguaje(){
 
         }
@@ -29,6 +31,14 @@ namespace Evalua{
                     return true;
             }
             return false;
+        }
+
+        private void modificaValor(string nombre, float nvalor){// Requerimiento 3 ya
+            foreach(Variable v in variables){
+                if(nombre == v.getNombre()){
+                    v.setValor(nvalor);
+                }
+            }
         }
 
         //Programa	-> 	Librerias? Variables? Main
@@ -136,10 +146,20 @@ namespace Evalua{
         // Asignacion -> identificador = Expresion ;
         private void Asignacion(){
             // Requerimiento 2 si no existe la variable, se levanta la excepcion
+            // Requerimiento 3 Modificar el valor de la variable en la asignacion.
+            log.WriteLine();
+            log.Write(getContenido() + " = " );
+            string nombre = getContenido();
+            if(!existeVariable(getContenido()))
+                throw new Error("Error de sintaxis, variable <" + getContenido() +"> no existe en el contexto actual, linea: "+linea, log);
             match(tipos.identificador);
             match("=");
             Expresion();
             match(";");
+            float resultado = stack.Pop();
+            log.Write("= " +resultado);
+            log.WriteLine();
+            modificaValor(nombre,resultado);
         }
 
         // While -> while(Condicion) bloqueInstrucciones | instruccion
@@ -186,6 +206,9 @@ namespace Evalua{
         // Incremento -> Identificador ++ | --
         private void Incremento(){
             // Requerimiento 2 si no existe la variable, se levanta la excepcion
+            if(!existeVariable(getContenido()))
+                throw new Error("Error de sintaxis, variable <" + getContenido() +"> no existe en el contexto actual, linea: "+linea, log);
+            match(tipos.identificador);
             match(tipos.identificador);
             if(getContenido() == "++")
                 match("++");
@@ -290,8 +313,20 @@ namespace Evalua{
         // MasTermino -> (operador_termino Termino)?
         private void masTermino(){
             if(getClasificacion() == tipos.operador_termino){
+                string operador = getContenido();
                 match(tipos.operador_termino);
                 termino();
+                log.Write(operador + " ");
+                float n1 = stack.Pop();
+                float n2 = stack.Pop();
+                switch(operador){
+                    case "+":
+                        stack.Push(n2 + n1);
+                        break;
+                    case "-":
+                        stack.Push(n2 - n1);
+                        break;
+                }
             }
         }
         
@@ -304,18 +339,36 @@ namespace Evalua{
         // PorFactor -> (operador_factor Factor)?
         private void porFactor(){
             if(getClasificacion() == tipos.operador_factor){
+                string operador = getContenido();
                 match(tipos.operador_factor);
                 factor();
+                log.Write(operador + " ");
+                float n1 = stack.Pop();
+                float n2 = stack.Pop();
+                switch(operador){
+                    case "*":
+                        stack.Push(n2 * n1);
+                        break;
+                    case "/":
+                        stack.Push(n2 / n1);
+                        break;
+                }
             }
         }
         
         // Factor -> numero | identificador | (Expresion) 
         private void factor(){
-            if(getClasificacion() == tipos.numero)
+            if(getClasificacion() == tipos.numero){
+                log.Write(getContenido() + " ");
+                stack.Push(float.Parse(getContenido()));
                 match(tipos.numero);
-            else if(getClasificacion() == tipos.identificador)
+            }
+            else if(getClasificacion() == tipos.identificador){
                 // Requerimiento 2 si no existe la variable, se levanta la excepcion
+                if(!existeVariable(getContenido()))
+                    throw new Error("Error de sintaxis, variable <" + getContenido() +"> no existe en el contexto actual, linea: "+linea, log);
                 match(tipos.identificador);
+            }
             else{
                 match("(");
                 Expresion();

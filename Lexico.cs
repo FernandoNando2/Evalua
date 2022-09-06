@@ -266,8 +266,10 @@ namespace Evalua{
                 else
                     throw new Error("Error Lexico linea " +linea +": No definido.", log);
             }
-            else if(!FinArchivo())
-                log.WriteLine(getContenido() + " | " + getClasificacion());        
+            else if(!FinArchivo()){
+                
+            }
+                //log.WriteLine(getContenido() + " | " + getClasificacion());        
         }
 
         public bool FinArchivo()
