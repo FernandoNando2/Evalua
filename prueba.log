@@ -1,13 +1,15 @@
 Archivo: C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\prueba.cpp
-Compilado: 06/09/2022 11:35:56 a. m.
+Compilado: 07/09/2022 06:00:45 p. m.
 
-a = 3 5 + 8 * 10 4 - 2 / - = 61
+x = 11 = 11
+3 5 + 8 * x 4 - 2 / - 
+Variables: 
 resultado Float 0
-a Int 61
+a Int 0
 b Int 0
 c Int 0
 d Int 0
 opcion Char 0
 radio Float 0
 altura Float 0
-x Float 0
+x Float 11

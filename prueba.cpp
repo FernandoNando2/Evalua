@@ -7,5 +7,7 @@ char opcion;
 float radio, altura, x;
 // Este programa calcula el volumen de un cilindro.
 void main(){
-    a = (3 + 5) * 8 - (10 - 4) / 2;
+    x = 11;
+    printf("Resultado = ");
+    printf((3 + 5) * 8 - (x - 4) / 2);
 }

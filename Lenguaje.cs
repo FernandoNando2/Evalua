@@ -3,6 +3,7 @@ using System;
 Requerimiento 1: Eliminar las dobles comillas del printf e interpretar las secuencias dentro de la cadena.
 Requerimiento 2: Marcar los errores sintacticos cuando la variable no exista. ya
 Requerimiento 3: Modificar el valor de la variable en la asignacion. ya
+Requerimiento 4: Obtener el valor de la variable cuando se requiera y programar el metodo getValor. ya
 */
 namespace Evalua{
     public class Lenguaje : Sintaxis{
@@ -21,6 +22,7 @@ namespace Evalua{
         }
 
         public void displayVariables(){
+            log.WriteLine("\nVariables: ");
             foreach (Variable v in variables)
                 log.WriteLine(v.getNombre() +" " +v.getTipo() +" " +v.getValor());
         }
@@ -39,6 +41,15 @@ namespace Evalua{
                     v.setValor(nvalor);
                 }
             }
+        }
+
+        private float getValor(string nombre){
+            float valor = 0;
+            foreach(Variable v in variables){
+                if(getContenido().Equals(nombre))
+                    valor = v.getValor();
+            }
+            return valor;
         }
 
         //Programa	-> 	Librerias? Variables? Main
@@ -206,14 +217,18 @@ namespace Evalua{
         // Incremento -> Identificador ++ | --
         private void Incremento(){
             // Requerimiento 2 si no existe la variable, se levanta la excepcion
+            string variable = getContenido();
             if(!existeVariable(getContenido()))
                 throw new Error("Error de sintaxis, variable <" + getContenido() +"> no existe en el contexto actual, linea: "+linea, log);
             match(tipos.identificador);
-            match(tipos.identificador);
-            if(getContenido() == "++")
+            if(getContenido() == "++"){
                 match("++");
-            else
+                modificaValor(variable, getValor((variable))+1);
+            }
+            else{
                 match("--");
+                modificaValor(variable, getValor((variable))-1);
+            }
         }
 
         // Switch -> switch(Expresion){listaDeCasos}
@@ -221,6 +236,7 @@ namespace Evalua{
             match("switch");
             match("(");
             Expresion();
+            stack.Pop();
             match(")");
             match("{");
             listaDeCasos();
@@ -253,8 +269,10 @@ namespace Evalua{
         //Condicion -> Expresion operador_relacional Expresion
         private void Condicion(){
             Expresion();
+            stack.Pop();
             match(tipos.operador_relacional);
             Expresion();
+            stack.Pop();
         }
 
         // If -> if(Condicion) Bloque de instrucciones (Else bloqueInstrucciones)?
@@ -276,17 +294,23 @@ namespace Evalua{
             }
         }
 
-        // Printf -> printf(cadena);
+        // Printf -> printf(cadena | expresion);
         private void Printf(){
             match("printf");
             match("(");
-            Console.Write(getContenido());
-            match(tipos.cadena);
+            if(getClasificacion() == tipos.cadena){
+                Console.Write(getContenido().Replace("\"",""));
+                match(tipos.cadena);
+            }
+            else{
+                Expresion();
+                Console.Write(stack.Pop());
+            }
             match(")");
             match(tipos.fin_sentencia);
         }
 
-        // Scanf -> scanf(cadena);
+        // Scanf -> scanf(cadena , & identificador);
         private void Scanf(){
             match("scanf");
             match("(");
@@ -365,6 +389,8 @@ namespace Evalua{
             }
             else if(getClasificacion() == tipos.identificador){
                 // Requerimiento 2 si no existe la variable, se levanta la excepcion
+                log.Write(getContenido() + " ");
+                stack.Push(getValor(getContenido()));
                 if(!existeVariable(getContenido()))
                     throw new Error("Error de sintaxis, variable <" + getContenido() +"> no existe en el contexto actual, linea: "+linea, log);
                 match(tipos.identificador);

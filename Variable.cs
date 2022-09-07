@@ -29,7 +29,7 @@ namespace Evalua{
             this.tipo = tipo;
         }
 
-        public double getValor(){
+        public float getValor(){
             return this.valor;
         }
 
