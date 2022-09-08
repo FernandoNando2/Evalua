@@ -1,9 +1,10 @@
 using System;
 /*
-Requerimiento 1: Eliminar las dobles comillas del printf e interpretar las secuencias dentro de la cadena.
+Requerimiento 1: Eliminar las dobles comillas del printf e interpretar las secuencias dentro de la cadena. ya
 Requerimiento 2: Marcar los errores sintacticos cuando la variable no exista. ya
 Requerimiento 3: Modificar el valor de la variable en la asignacion. ya
 Requerimiento 4: Obtener el valor de la variable cuando se requiera y programar el metodo getValor. ya
+Requerimiento 5: Modificar el valor de la variable en el scanf().ya
 */
 namespace Evalua{
     public class Lenguaje : Sintaxis{
@@ -299,12 +300,15 @@ namespace Evalua{
             match("printf");
             match("(");
             if(getClasificacion() == tipos.cadena){
-                Console.Write(getContenido().Replace("\"",""));
+                Console.Write(getContenido().Replace("\"","").Replace("\\n",""));
                 match(tipos.cadena);
             }
             else{
+                foreach(Variable v in variables){
+                    if(getContenido().Equals(v.getNombre()))
+                        Console.Write(v.getValor());
+                }
                 Expresion();
-                Console.Write(stack.Pop());
             }
             match(")");
             match(tipos.fin_sentencia);
@@ -315,6 +319,16 @@ namespace Evalua{
             match("scanf");
             match("(");
             match(tipos.cadena);
+            match(",");
+            match("&");
+            // Requerimiento 2: si no existe el indentificador, lanzar excepcion.
+            string valor = "" + Console.ReadLine();
+            modificaValor(getContenido(),float.Parse(valor));
+            // Requerimiento 5: modificar el valor de la variable.
+            if(!existeVariable(getContenido())){
+                throw new Error("Error de sintaxis, variable <" + getContenido() +"> no existe en el contexto actual, linea: "+linea, log);
+            }
+            match(tipos.identificador);
             match(")");
             match(tipos.fin_sentencia);
         }
