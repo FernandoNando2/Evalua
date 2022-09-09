@@ -4,7 +4,7 @@ Requerimiento 1: Eliminar las dobles comillas del printf e interpretar las secue
 Requerimiento 2: Marcar los errores sintacticos cuando la variable no exista. ya
 Requerimiento 3: Modificar el valor de la variable en la asignacion. ya
 Requerimiento 4: Obtener el valor de la variable cuando se requiera y programar el metodo getValor. ya
-Requerimiento 5: Modificar el valor de la variable en el scanf().ya
+Requerimiento 5: Modificar el valor de la variable en el scanf(). ya
 */
 namespace Evalua{
     public class Lenguaje : Sintaxis{
@@ -45,12 +45,11 @@ namespace Evalua{
         }
 
         private float getValor(string nombre){
-            float valor = 0;
             foreach(Variable v in variables){
-                if(getContenido().Equals(nombre))
-                    valor = v.getValor();
+                if(v.getNombre().Equals(nombre))
+                    return v.getValor();
             }
-            return valor;
+            return 0;
         }
 
         //Programa	-> 	Librerias? Variables? Main
@@ -257,6 +256,7 @@ namespace Evalua{
         private void listaDeCasos(){
             match("case");
             Expresion();
+            stack.Pop();
             match(":");
             listaInstruccionesCase();
             if(getContenido() == "break") {
@@ -300,7 +300,7 @@ namespace Evalua{
             match("printf");
             match("(");
             if(getClasificacion() == tipos.cadena){
-                Console.Write(getContenido().Replace("\"","").Replace("\\n",""));
+                Console.Write(getContenido().Replace("\"","").Replace("\\n","\n").Replace("\\t","\t"));
                 match(tipos.cadena);
             }
             else{
@@ -309,6 +309,7 @@ namespace Evalua{
                         Console.Write(v.getValor());
                 }
                 Expresion();
+                stack.Pop();
             }
             match(")");
             match(tipos.fin_sentencia);
@@ -403,10 +404,10 @@ namespace Evalua{
             }
             else if(getClasificacion() == tipos.identificador){
                 // Requerimiento 2 si no existe la variable, se levanta la excepcion
-                log.Write(getContenido() + " ");
-                stack.Push(getValor(getContenido()));
                 if(!existeVariable(getContenido()))
                     throw new Error("Error de sintaxis, variable <" + getContenido() +"> no existe en el contexto actual, linea: "+linea, log);
+                log.Write(getContenido() + " ");
+                stack.Push(getValor(getContenido()));
                 match(tipos.identificador);
             }
             else{

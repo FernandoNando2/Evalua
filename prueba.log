@@ -1,12 +1,18 @@
 Archivo: C:\Users\Fernando Hernandez\Desktop\ITQ\5to Semestre\Lenguajes y Automatas II\Evalua\prueba.cpp
-Compilado: 08/09/2022 12:09:44 p. m.
+Compilado: 09/09/2022 09:58:15 a. m.
 
-pi = 3.141592653589 = 3.1415927
+pi = 3.141592653589793 = 3.1415927
 
-area = pi radio radio * * = 31.006279
+d = 4 = 4
+
+area = pi radio radio * * = 314.15927
 area 
+d = 10 = 10
+d 20 
 Variables: 
-resultado Float 0
-area Float 31.006279
-radio Float 100
+area Float 314.15927
+radio Float 10
 pi Float 3.1415927
+resultado Float 0
+a Int 0
+d Int 11
